@@ -4,7 +4,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email } = req.body;
+    const email = req.body?.email;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
 
     const response = await fetch(
       "https://api.korapay.com/merchant/api/v1/charges/initialize",
@@ -15,11 +19,9 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 14000, // locked price
+          amount: 14000,
           currency: "NGN",
-          customer: {
-            email,
-          },
+          customer: { email },
         }),
       }
     );
