@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const email = "test@email.com"; // hardcoded for now
+    const email = "test@email.com";
 
     const response = await fetch(
       "https://api.korapay.com/merchant/api/v1/charges/initialize",
@@ -17,6 +17,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           amount: 14000,
           currency: "NGN",
+          reference: `ref_${Date.now()}`,
           customer: { email },
         }),
       }
