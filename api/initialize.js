@@ -4,11 +4,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const email = req.body?.email;
-
-    if (!email) {
-      return res.status(400).json({ message: "Email is required" });
-    }
+    const email = "test@email.com"; // hardcoded for now
 
     const response = await fetch(
       "https://api.korapay.com/merchant/api/v1/charges/initialize",
