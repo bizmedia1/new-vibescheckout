@@ -1,10 +1,21 @@
 export default async function handler(req, res) {
+  // ✅ CORS HEADERS
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // ✅ Handle preflight request
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  // ✅ Only allow POST
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
   try {
-    const email = "test@email.com";
+    const email = "test@email.com"; // temporary (replace later with frontend input)
 
     const response = await fetch(
       "https://api.korapay.com/merchant/api/v1/charges/initialize",
@@ -18,7 +29,10 @@ export default async function handler(req, res) {
           amount: 14000,
           currency: "NGN",
           reference: `ref_${Date.now()}`,
-          customer: { email },
+          redirect_url: "https://yourwebsite.com/success", // 🔁 replace with your real URL
+          customer: {
+            email,
+          },
         }),
       }
     );
