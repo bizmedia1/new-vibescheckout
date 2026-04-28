@@ -29,7 +29,7 @@ export default async function handler(req, res) {
           amount: 14000,
           currency: "NGN",
           reference: `ref_${Date.now()}`,
-          redirect_url: "https://yourwebsite.com/success", // 🔁 replace with your real URL
+          redirect_url: "https://tr.ee/kf8yz4NjOi", // 🔁 replace with your real URL
           customer: {
             email,
           },
